@@ -26,5 +26,13 @@
         "sort-packages": true,
         "preferred-install": "dist",
         "optimize-autoloader": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php artisan vendor:publish --provider=\"Saleem\\DataTransferObject\\Providers\\DataTransferObjectProvider\" --tag=stubs"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --provider=\"Saleem\\DataTransferObject\\Providers\\DataTransferObjectProvider\" --tag=stubs"
+        ]
     }
 }

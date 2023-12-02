@@ -1,3 +1,18 @@
+
+## Introduction
+
+This package provides a `BaseDTO` class that facilitates handling Data Transfer Objects. It allows easy access to individual properties and conversion to JSON or arrays.
+
+## Installation
+
+To use the this package, follow these steps:
+
+1. **Installation via Composer:**
+
+   ```bash
+   composer require saleem/data-transfer-object
+
+
 ```php
 class PersonalInfoDto extends BaseDto
 {

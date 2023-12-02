@@ -1,0 +1,30 @@
+{
+    "name": "saleem/data-transfer-object",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Saleem\\DataTransferObject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Saleem Ayoub",
+            "email": "saleemayoub1@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Saleem\\DataTransferObject\\Providers\\DataTransferObjectProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    }
+}

@@ -1,0 +1,52 @@
+<?php
+
+namespace {{DtoNamespace}};
+
+use Saleem\DataTransferObject\BaseDto;
+
+/**
+ * Class {{DtoName}}Dto
+ *
+ * This DTO class represents the data transfer object for {{DtoName}}.
+ * It extends the BaseDto class, providing common functionality for DTOs.
+ *
+ * @package Saleem\DataTransferObject
+ */
+class {{DtoName}}Dto extends BaseDto
+{
+    // -------------------------------------------------------------------------
+    // Attributes
+    // -------------------------------------------------------------------------
+
+    /**
+     * @var string|null $attribute1
+     * Description: Brief description of attribute1.
+     * Example: 'John'
+     */
+    public ?string $attribute1 = null;
+
+    /**
+     * @var int|null $attribute2
+     * Description: Brief description of attribute2.
+     * Example: 25
+     */
+    public ?int $attribute2 = null;
+
+    /**
+     * @var array $attribute3
+     * Description: Brief description of attribute3.
+     * Example: ['value1', 'value2']
+     */
+    public array $attribute3 = [];
+
+    // Add more attributes as needed...
+
+    // -------------------------------------------------------------------------
+    // If you want to perform additional array casting, you can use the following.
+    // Casting should be defined in the following modifier and variable name
+    // -------------------------------------------------------------------------
+     protected static array $arrayCasts = [
+        'attribute3' => ReleventClass::class,
+        // Add more properties as needed
+    ];
+}

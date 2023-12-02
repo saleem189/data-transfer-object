@@ -123,6 +123,24 @@ class PersonalInfoDto extends BaseDto
 } 
 
 ```
+
+#### Using Arrays of DTOs within DTOs:
+
+When utilizing arrays of the same DTO within a larger DTO class, it's beneficial to cast them into relevant DTO classes using array casting ($arrayCasts).
+
+Benefits:
+
+    Structured Data: Maintain a consistent structure by ensuring arrays hold instances of specific DTO classes.
+
+    Encapsulation: Simplify data access and manipulation by grouping related elements together.
+
+    Consistency: Establish a clear and standardized format for improved readability.
+
+    Enhanced Functionality: Leverage specific functionalities defined within DTO classes.
+
+    Data Validation: Enforce type safety and validation rules for better data integrity.
+
+Casting arrays into relevant DTO classes enhances readability, maintains structure, and provides better control over data management within your DTOs.
 ### Now using different DTO's in a single container
 
 ```php

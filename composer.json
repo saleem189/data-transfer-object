@@ -1,5 +1,6 @@
 {
     "name": "saleem/data-transfer-object",
+    "description": "A Simple Data Transfer Object without any dependency and command supported",
     "type": "library",
     "license": "MIT",
     "autoload": {

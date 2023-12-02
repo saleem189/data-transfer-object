@@ -16,7 +16,7 @@ class DataTransferObjectProvider extends ServiceProvider
     {
         // Publish your stubs or other assets if needed
         $this->publishes([
-            __DIR__.'/../stubs' => base_path('stubs'),
+            __DIR__.'/../Stubs' => base_path('stubs'),
         ], 'stubs');
 
         // if ($this->app->runningInConsole()) {

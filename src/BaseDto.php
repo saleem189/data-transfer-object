@@ -150,12 +150,12 @@ abstract class BaseDto
         return $key;
     }
 
-    public function without(string|array $excludeBuffer, bool $asDTO = false, int $flags = 0): array|BaseDtoAbstract
+    public function without(string|array $excludeBuffer, bool $asDTO = false, int $flags = 0): array|BaseDto
     {
         $exclude = is_array($excludeBuffer) ? $excludeBuffer : [$excludeBuffer];
         $keys = array_keys(get_object_vars($this));
         if ($asDTO) {
-            $finalData = new class extends BaseDtoAbstract {
+            $finalData = new class extends BaseDto {
             };
 
             $data = $this;
@@ -192,12 +192,12 @@ abstract class BaseDto
         return $this->getData($flags);
     }
 
-    public function only(array $keysBuffer, bool $asDTO = false, int $flags = 0): array|BaseDtoAbstract
+    public function only(array $keysBuffer, bool $asDTO = false, int $flags = 0): array|BaseDto
     {
         $keys = is_array($keysBuffer) ? $keysBuffer : [$keysBuffer];
 
         if ($asDTO) {
-            $finalData = new class extends BaseDtoAbstract {
+            $finalData = new class extends BaseDto {
             };
 
             $data = $this;

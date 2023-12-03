@@ -15,7 +15,7 @@
             "email": "saleemayoub1@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {},
     "extra": {
         "laravel": {

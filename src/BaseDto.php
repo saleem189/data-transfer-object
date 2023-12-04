@@ -4,8 +4,11 @@ namespace Saleem\DataTransferObject;
 
 use Illuminate\Support\Str;
 use ReflectionProperty;
+use Saleem\DataTransferObject\Enums\KeyTransformStrategiesEnum;
 use Saleem\DataTransferObject\Exceptions\ClassNotFoundException;
 use Saleem\DataTransferObject\Exceptions\IntersectionTypesNotSupportedException;
+use Saleem\DataTransferObject\KeyTransformStrategies\CamelCaseStrategy;
+use Saleem\DataTransferObject\KeyTransformStrategies\SnakeCaseStrategy;
 
 define('KEYS_TO_CC', 1 << 0);
 define('KEYS_TO_SC', 1 << 1);
@@ -141,10 +144,10 @@ abstract class BaseDto
 
     public static function transformKey(string $key, int $flags): string
     {
-        if (($flags & KEYS_TO_CC) !== 0) {
-            return Str::camel($key);
-        } else if (($flags & KEYS_TO_SC) !== 0) {
-            return Str::snake($key);
+        if ($flags === KeyTransformStrategiesEnum::KEYS_TO_CC->value ) {
+            return CamelCaseStrategy::transform($key);
+        } else if ($flags === KeyTransformStrategiesEnum::KEYS_TO_SC->value) {
+            return SnakeCaseStrategy::transform($key);
         }
 
         return $key;

@@ -7,11 +7,10 @@ use ReflectionProperty;
 use Saleem\DataTransferObject\Enums\KeyTransformStrategiesEnum;
 use Saleem\DataTransferObject\Exceptions\ClassNotFoundException;
 use Saleem\DataTransferObject\Exceptions\IntersectionTypesNotSupportedException;
+use Saleem\DataTransferObject\Exceptions\PropertyMissMatch;
 use Saleem\DataTransferObject\KeyTransformStrategies\CamelCaseStrategy;
 use Saleem\DataTransferObject\KeyTransformStrategies\SnakeCaseStrategy;
 
-define('KEYS_TO_CC', 1 << 0);
-define('KEYS_TO_SC', 1 << 1);
 
 abstract class BaseDto
 {
@@ -42,10 +41,16 @@ abstract class BaseDto
     private static function mapParameters(array $parameters, array $data, array $arrayCasts): array
     {
         $map = [];
-
+        $currentClassParameters = static::getClassProperties($parameters);
         foreach ($parameters as $parameter) {
             $name = $parameter->getName();
             $types = $parameter->getType();
+            
+            if (!static::recursiveFindKey($data, $name) && 'arrayCasts' !== $name) {
+                $missingParameter = array_diff(array_keys($data),$currentClassParameters);
+                // Handle mismatch or throw an exception
+                throw new PropertyMissMatch(reset($missingParameter), class_basename($parameter->class), $name);
+            }
 
             if ($types instanceof \ReflectionUnionType) {
                 $typeNames = array_map(fn (\ReflectionNamedType $type) => $type->getName(), $types->getTypes());
@@ -228,4 +233,44 @@ abstract class BaseDto
     {
         return json_encode($this->data());
     }
+
+     /**
+     * Recursively finds a key in a multidimensional array.
+     *
+     * @param array $haystack the array to search in
+     * @param mixed $needle   the key to find
+     *
+     * @return bool true if the key is found, false otherwise
+     */
+    private static function recursiveFindKey(array $haystack, $needle): bool
+    {
+        // Create an iterator for the array
+        $iterator = new \RecursiveArrayIterator($haystack);
+        
+        // Create a recursive iterator that traverses the array in a depth-first manner
+        $recursive = new \RecursiveIteratorIterator(
+            $iterator,
+            \RecursiveIteratorIterator::SELF_FIRST
+        );
+
+        // Loop through each element in the recursive iterator
+        foreach ($recursive as $key => $value) {
+            // Check if the current key matches the desired key
+            if ($key === $needle) {
+                return true;
+            }
+        }
+
+        // If the key is not found, return false
+        return false;
+    }
+
+    private static function getClassProperties(array $parameters): array {
+        $currentParameters = [];
+        foreach ($parameters as $parameter) {
+            $currentParameters[]=$parameter->getName();
+        }
+        return $currentParameters;
+    }
+    
 }

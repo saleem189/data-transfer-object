@@ -46,6 +46,7 @@ abstract class BaseDto
             $name = $parameter->getName();
             $types = $parameter->getType();
             
+            
             if (!static::recursiveFindKey($data, $name) && 'arrayCasts' !== $name) {
                 $missingParameter = array_diff(array_keys($data),$currentClassParameters);
                 // Handle mismatch or throw an exception

@@ -184,7 +184,6 @@ abstract class BaseDto
             $data = $this->data();
             
             foreach ($keys as $keyBuffer) {
-                // dd($data, $keyBuffer);
                 if (in_array($keyBuffer, $exclude)) {
                     continue;
                 }
@@ -275,7 +274,7 @@ abstract class BaseDto
         return $currentParameters;
     }
 
-    public function changeKeys($oldKey, $newKey=null): self
+    public function changeKeys(string|array $oldKey, string $newKey=null): self
     {
         if (is_array($oldKey)) {
             return $this->changeKeysFromArray($oldKey);
@@ -306,7 +305,7 @@ abstract class BaseDto
         return $newDto;
     }
 
-    private function arrayKeyReplace($array, $oldKey, $newKey): array
+    private function arrayKeyReplace( array $array, string $oldKey, string $newKey): array
     {
         $newArray = [];
 

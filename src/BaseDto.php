@@ -140,7 +140,7 @@ abstract class BaseDto
             $key = self::transformKey($keyBuffer, $flags);
 
             if (is_object($data) || is_array($data)) {
-                $finalData[$key] = $this->getDataRecursive((array) $data);
+                $finalData[$key] = $this->getDataRecursive((array) $data, $flags);
             } else {
                 $finalData[$key] = $data;
             }
@@ -273,6 +273,56 @@ abstract class BaseDto
             $currentParameters[]=$parameter->getName();
         }
         return $currentParameters;
+    }
+
+    public function changeKeys($oldKey, $newKey=null): self
+    {
+        if (is_array($oldKey)) {
+            return $this->changeKeysFromArray($oldKey);
+        }
+
+        $data = $this->getData(); // Retrieve the stored data
+        $newData = $this->arrayKeyReplace($data, $oldKey, $newKey); // replacing array keys
+
+        // Create a new instance of the DTO and set the modified data
+        $newDto = new static();
+        $newDto->setData($newData);
+
+        return $newDto;
+    }
+
+    private function changeKeysFromArray(array $keyMappings): self
+    {
+        $data = $this->getData(); // Retrieve the stored data
+
+        foreach ($keyMappings as $oldKey => $newKey) {
+            $data = $this->arrayKeyReplace($data, $oldKey, $newKey); // replacing keys
+        }
+
+        // Create a new instance of the DTO and set the modified data
+        $newDto = new static();
+        $newDto->setData($data);
+
+        return $newDto;
+    }
+
+    private function arrayKeyReplace($array, $oldKey, $newKey): array
+    {
+        $newArray = [];
+
+        foreach ($array as $key => $value) {
+            // Replace the key if it matches the old key
+            $replacedKey = ($key === $oldKey) ? $newKey : $key;
+
+            // Recursively replace keys in nested arrays
+            if (is_array($value)) {
+                $value = $this->arrayKeyReplace($value, $oldKey, $newKey);
+            }
+
+            $newArray[$replacedKey] = $value;
+        }
+
+        return $newArray;
     }
     
 }

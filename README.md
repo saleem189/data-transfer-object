@@ -88,6 +88,59 @@ print_r($includedData);
 // [firstName] => John
 // [email] => john@example.com
 // )
+
+```
+#### Changing Keys and assigining new keys
+
+```php
+$data = CreateCarrierDTO::build([
+    'auth0_user_id' => '21sqwaW',
+    'turvo_id' => 1,
+    'email' => 'email@gmail.com',
+    'name' => 'name',
+    'mc_number' => 'qweqwe',
+    'dot_number' => 1,
+    'turvo_status' => 'turvo_status',
+]);
+
+$keysPassedAsArray = [
+    'auth0_user_id' => 'NewAuthId',
+    'turvo_id' => 'NewTurvoId',
+];
+$passedAsArray = $data->changeKeys($keysPassedAsArray);
+// array(7) {
+//     ["NewAuthId"]=>          Changed        
+//     string(7) "21sqwaW"
+//     ["NewTurvoId"]=>         Changed
+//     int(1)
+//     ["email"]=>
+//     string(17) "email@gmail.com"
+//     ["name"]=>
+//     string(4) "name"
+//     ["mc_number"]=>
+//     string(6) "qweqwe"
+//     ["dot_number"]=>
+//     int(1)
+//     ["turvo_status"]=>
+//     string(12) "turvo_status"
+//   }
+$passingSingleKey = $data->changeKeys('auth0_user_id', 'NewAuthId');
+// array(7) {
+//     ["NewAuthId"]=>          Changed
+//     string(7) "21sqwaW"
+//     ["turvo_id"]=>
+//     int(1)
+//     ["email"]=>
+//     string(17) "email@gmail.com"
+//     ["name"]=>
+//     string(4) "name"
+//     ["mc_number"]=>
+//     string(6) "qweqwe"
+//     ["dot_number"]=>
+//     int(1)
+//     ["turvo_status"]=>
+//     string(12) "turvo_status"
+//   }
 ```
 
 ## Using different DTO's in a single container 

@@ -2,6 +2,7 @@
 
 namespace Saleem\DataTransferObject;
 
+use Saleem\DataTransferObject\DataHandling\ArrayKeyMapping;
 use Saleem\DataTransferObject\DataHandling\DataMapping;
 use Saleem\DataTransferObject\DataHandling\GetData;
 use Saleem\DataTransferObject\DataHandling\KeyModifier;
@@ -63,6 +64,11 @@ abstract class BaseDto
     public function only(string|array $keysBuffer, bool $asDTO = false, int $flags = 0): array|BaseDto
     {
         return KeyModifier::includeProperties($keysBuffer, $this->data(), $asDTO, $flags);
+    }
+
+    public function changeKeys(string|array $key, string $newKey = null, int $flags = 0): array|BaseDto
+    {
+        return ArrayKeyMapping::changeKeys($key, $newKey, $this->data(), $flags);
     }
 
     public function __toString(): string

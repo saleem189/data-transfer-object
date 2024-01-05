@@ -11,7 +11,10 @@ To use the this package, follow these steps:
 
    ```bash
    composer require saleem/data-transfer-object
-
+2. For config file publishing (this will publish file in config under "data-transfer-object.php") from there you can change NameSpace
+```bash
+   php artisan vendor:publish --tag=config-file
+```
 ## Creating new DTO class
 1. **Using Command**
     ```bash

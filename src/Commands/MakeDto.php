@@ -128,6 +128,6 @@ class MakeDto extends Command implements PromptsForMissingInput
      */
     protected function getNameSpace(): string
     {
-        return 'App\\Common\\DTO';
+        return config('data-transfer-object.defaultNamespace');
     }
 }

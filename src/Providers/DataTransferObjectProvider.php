@@ -19,11 +19,9 @@ class DataTransferObjectProvider extends ServiceProvider
             __DIR__.'/../Stubs' => base_path('stubs'),
         ], 'stubs');
 
-        // if ($this->app->runningInConsole()) {
-        //     $this->commands([
-        //         MakeDto::class,
-        //     ]);
-        // }
+        $this->publishes([
+            __DIR__.'/../Config/data-transfer-object.php' => config_path('data-transfer-object.php'),
+        ]);
     }
 
     public function register()

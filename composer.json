@@ -32,12 +32,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@php artisan vendor:publish --provider=\"Saleem\\DataTransferObject\\Providers\\DataTransferObjectProvider\" --tag=stubs",
-            "@php artisan vendor:publish --provider=\"Saleem\\DataTransferObject\\Providers\\DataTransferObjectProvider\" --tag=config-file"
+            "@php artisan vendor:publish --tag=config-file --force"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --provider=\"Saleem\\DataTransferObject\\Providers\\DataTransferObjectProvider\" --tag=stubs",
-            "@php artisan vendor:publish --provider=\"Saleem\\DataTransferObject\\Providers\\DataTransferObjectProvider\" --tag=config-file"
+            "@php artisan vendor:publish --tag=config-file --force"
         ]
     }
 }

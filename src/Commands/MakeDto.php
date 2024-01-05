@@ -92,7 +92,16 @@ class MakeDto extends Command implements PromptsForMissingInput
     public function getSourceFilePath(): string
     {
         $className = $this->getSingularClassName($this->argument('name')) . 'Dto';
-        return app_path('Common/DTO/' . $className . '.php');
+        $namespace = $this->getNameSpace();
+        $namespaceParts = explode('\\', $namespace);
+    
+        // Remove the initial 'App' segment if present
+        if ($namespaceParts[0] === 'App') {
+            array_shift($namespaceParts);
+        }
+    
+        $path = app_path(implode('/', $namespaceParts) .'/'. $className . '.php');
+        return $path;
     }
 
     /**

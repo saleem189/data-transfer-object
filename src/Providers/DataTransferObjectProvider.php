@@ -21,7 +21,7 @@ class DataTransferObjectProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../Config/data-transfer-object.php' => config_path('data-transfer-object.php'),
-        ]);
+        ], 'config-file');
     }
 
     public function register()
@@ -31,5 +31,8 @@ class DataTransferObjectProvider extends ServiceProvider
                 MakeDto::class,
             ]);
         }
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/data-transfer-object.php', 'data-transfer-object'
+        );
     }
 }

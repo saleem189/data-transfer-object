@@ -98,23 +98,23 @@ print_r($includedData);
 ```php
 $data = CreateCarrierDTO::build([
     'auth0_user_id' => '21sqwaW',
-    'turvo_id' => 1,
+    'some_id' => 1,
     'email' => 'email@gmail.com',
     'name' => 'name',
     'mc_number' => 'qweqwe',
     'dot_number' => 1,
-    'turvo_status' => 'turvo_status',
+    'some_status' => 'some_status',
 ]);
 
 $keysPassedAsArray = [
     'auth0_user_id' => 'NewAuthId',
-    'turvo_id' => 'NewTurvoId',
+    'some_id' => 'NewSomeId',
 ];
 $passedAsArray = $data->changeKeys($keysPassedAsArray);
 // array(7) {
 //     ["NewAuthId"]=>          Changed        
 //     string(7) "21sqwaW"
-//     ["NewTurvoId"]=>         Changed
+//     ["NewSomeId"]=>         Changed
 //     int(1)
 //     ["email"]=>
 //     string(17) "email@gmail.com"
@@ -124,14 +124,14 @@ $passedAsArray = $data->changeKeys($keysPassedAsArray);
 //     string(6) "qweqwe"
 //     ["dot_number"]=>
 //     int(1)
-//     ["turvo_status"]=>
-//     string(12) "turvo_status"
+//     ["some_status"]=>
+//     string(12) "some_status"
 //   }
 $passingSingleKey = $data->changeKeys('auth0_user_id', 'NewAuthId');
 // array(7) {
 //     ["NewAuthId"]=>          Changed
 //     string(7) "21sqwaW"
-//     ["turvo_id"]=>
+//     ["some_id"]=>
 //     int(1)
 //     ["email"]=>
 //     string(17) "email@gmail.com"
@@ -141,8 +141,8 @@ $passingSingleKey = $data->changeKeys('auth0_user_id', 'NewAuthId');
 //     string(6) "qweqwe"
 //     ["dot_number"]=>
 //     int(1)
-//     ["turvo_status"]=>
-//     string(12) "turvo_status"
+//     ["some_status"]=>
+//     string(12) "some_status"
 //   }
 ```
 

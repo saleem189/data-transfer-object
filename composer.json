@@ -1,6 +1,7 @@
 {
     "name": "saleem/data-transfer-object",
     "description": "A Simple Data Transfer Object without any dependency and command supported",
+    "keywords": ["laravel", "DTO", "data transfer object"],
     "type": "library",
     "license": "MIT",
     "autoload": {
